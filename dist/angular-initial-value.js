@@ -22,12 +22,19 @@ var initialValueModule = angular.module('initialValue', [])
       val = $attrs.initialValue || removeIndent($element.val());
       if(tag === 'input'){
         if($element.attr('type') === 'checkbox'){
-          val = $element[0].checked ? true : undefined;
+          val = $element[0].checked;
         } else if($element.attr('type') === 'radio'){
           val = ($element[0].checked || $element.attr('selected') !== undefined) ? $element.val() : undefined;
         } else if($element.attr('type') === 'number'){
           val = ($element.val() != undefined) ? parseFloat($element.val()) : undefined;
         }
+      }
+
+      if (angular.isString(val) && (val.indexOf('[') == 0 && val.lastIndexOf(']') == (val.length - 1)) 
+                                || (val.indexOf('{') == 0 && val.lastIndexOf('}') == (val.length - 1)))) {
+        try {
+          val = JSON.parse(val);
+        } catch (ex) {}
       }
 
       if($attrs.ngModel){
