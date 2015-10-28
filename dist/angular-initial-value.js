@@ -30,8 +30,8 @@ var initialValueModule = angular.module('initialValue', [])
         }
       }
 
-      if (angular.isString(val) && (val.indexOf('[') == 0 && val.lastIndexOf(']') == (val.length - 1)) 
-                                || (val.indexOf('{') == 0 && val.lastIndexOf('}') == (val.length - 1))) {
+      if (angular.isString(val) && ((val.indexOf('[') == 0 && val.lastIndexOf(']') == (val.length - 1)) 
+                                ||  (val.indexOf('{') == 0 && val.lastIndexOf('}') == (val.length - 1)))) {
         try {
           val = JSON.parse(val);
         } catch (ex) {}
